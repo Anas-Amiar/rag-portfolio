@@ -1,0 +1,22 @@
+# Secrets and keys: never commit these
+*.pem
+*.key
+.env
+.aws/
+credentials
+
+# Terraform state and local cache
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+
+# Python
+__pycache__/
+.venv/
+
+# Big data and test outputs
+*.parquet
+out.json
+.DS_Store
