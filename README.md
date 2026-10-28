@@ -90,3 +90,19 @@ cd infra && terraform destroy
 ```
 
 `force_destroy` is set, so the buckets are deleted even though they contain data.
+
+## Demo
+
+**Question:** How can language models avoid hallucinating?
+
+> Language models can avoid hallucinating by employing techniques like activation steering [1], which guides parallel token predictions through internal representations, and Step-level Self-Consistency Group Relative Policy Optimization (SSC-GRPO) [3], which uses self-consistency scores across multiple rollouts to detect and mitigate context-sensitive factual hallucinations. Additionally, uncertainty estimators can help identify unreliable generations, though their effectiveness varies [4]. However, the sources do not provide a comprehensive, singular solution, indicating that a combination of methods may be necessary [1][3][4].
+
+Top sources: [1] TRACESTEER: Trace Driven Activation Steering for Hallucination Mitigation in Diffusion Language Models (arXiv 2610.18173) · [3] Reasoning Error from Known Fact: Step-Level Self-Consistency GRPO for LLMs (arXiv 2607.18915) · [4] How Do Uncertainty Estimators Align with Hallucination Occurrence in LLMs? (arXiv 2605.27016)
+
+**Question:** What are the main ways to jailbreak a language model?
+
+> The main ways to jailbreak a language model, as inferred from the provided sources, include adversarial prompts that bypass safety alignment and induce harmful responses [1][3], and techniques that exploit vulnerabilities in dynamic inference [3]. Additionally, PRISM framework highlights interventions to mitigate unsafe tool calls [5]. However, specific methods are not detailed in the provided sources.
+
+Top sources: [1] Did the LLM Answer the Question? A Semantic Reconstruction Game for Jailbreak Evaluation (arXiv 2610.19306) · [3] Exploring Jailbreak Vulnerability Across Depth-Based Dynamic Inference in Large Language Models (arXiv 2610.15207)
+
+**What these two runs show:** the answers stay grounded in the retrieved papers, cite them, and say so when the sources are not enough. The weak spots are also visible. The first answer leans on a paper about diffusion language models, and the second one cites a paper about defending tool calls, not about jailbreaking.
