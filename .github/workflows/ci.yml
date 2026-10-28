@@ -1,0 +1,36 @@
+name: CI
+
+# Runs on every push and every pull request. Needs no AWS keys.
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install test tools
+        run: pip install pytest ruff
+      - name: Lint (find mistakes in the code)
+        run: ruff check rag tests
+      - name: Run tests
+        run: pytest -q tests
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+      - name: Initialize (no AWS access needed)
+        run: terraform init -backend=false
+      - name: Validate
+        run: terraform validate
