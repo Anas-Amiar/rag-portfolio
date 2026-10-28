@@ -36,4 +36,10 @@ resource "aws_s3vectors_index" "abstracts" {
   data_type       = "float32"
   dimension       = var.embedding_dimension
   distance_metric = "cosine"
+
+  # Metadata we only want to read back, never filter on. Filterable metadata is
+  # limited to 2 KB per vector, which a long abstract can exceed.
+  metadata_configuration {
+    non_filterable_metadata_keys = ["title", "abstract"]
+  }
 }
